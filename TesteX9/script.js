@@ -1,5 +1,5 @@
 // 1. Defina o endereço da sua API C#
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'http://localhost:5173/api';
 
 // ==========================================
 // NAVEGAÇÃO DO MENU (Esconder/Mostrar Telas)
