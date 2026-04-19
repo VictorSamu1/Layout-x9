@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TesteX9.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class SistemaEscola : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

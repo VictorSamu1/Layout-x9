@@ -11,8 +11,8 @@ using TesteX9.Data;
 namespace TesteX9.Migrations
 {
     [DbContext(typeof(EscolaContext))]
-    [Migration("20260419041541_Inicial")]
-    partial class Inicial
+    [Migration("20260419063328_SistemaEscola")]
+    partial class SistemaEscola
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

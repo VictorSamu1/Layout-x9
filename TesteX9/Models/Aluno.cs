@@ -13,7 +13,6 @@ namespace TesteX9.Models
         public DateTime DataNascimento { get; set; }
         public string Turma { get; set; }
         
-        // Relacionamento: Um aluno tem várias ocorrências
         public List<Ocorrencia> Ocorrencias { get; set; } 
     }
 }
