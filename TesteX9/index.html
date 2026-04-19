@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ocorrências Escolares - Completo</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 950px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        h1, h2, h3 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 0; }
+        
+        /* Navegação */
+        nav { max-width: 950px; margin: 0 auto 20px auto; background: #0056b3; padding: 15px; border-radius: 8px; display: flex; gap: 20px; }
+        nav a { color: white; text-decoration: none; font-weight: bold; font-size: 14px; }
+        nav a:hover { text-decoration: underline; }
+
+        /* Formulários e Layout */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input[type="text"], input[type="date"], input[type="time"], input[type="password"], select, textarea { 
+            width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-family: inherit;
+        }
+        .checkbox-group { display: flex; gap: 15px; flex-wrap: wrap; background: #f9f9f9; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .checkbox-group label { display: inline; font-weight: normal; margin: 0; }
+        
+        /* Botões */
+        button { background-color: #28a745; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-size: 14px; font-weight: bold; }
+        button:hover { background-color: #218838; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-secondary:hover { background-color: #5a6268; }
+        .btn-info { background-color: #17a2b8; padding: 5px 10px; font-size: 12px; }
+
+        /* Tabelas */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 10px; text-align: left; }
+        th { background-color: #f8f9fa; }
+
+        /* Grid */
+        .row { display: flex; gap: 20px; }
+        .col { flex: 1; }
+        
+        /* Lista de Alunos (Tela 3) */
+        .lista-alunos { list-style: none; padding: 0; margin: 0; }
+        .lista-alunos li { padding: 8px 10px; border-bottom: 1px solid #eee; cursor: pointer; color: #0056b3; font-size: 14px; }
+        .lista-alunos li:hover { background: #f1f1f1; }
+        .lista-alunos li.ativo { background: #e7f3ff; font-weight: bold; border-left: 4px solid #0056b3; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#login">1. Login / Cadastro</a>
+        <a href="#registro">2. Nova Ocorrência</a>
+        <a href="#pesquisa">3. Pesquisa e Turmas</a>
+        <a href="#perfil">4. Perfil do Aluno</a>
+    </nav>
+
+    <div id="login" class="container">
+        <h2>1. Acesso ao Sistema</h2>
+        <div class="row">
+            <div class="col" style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                <h3>Entrar</h3>
+                <div class="form-group">
+                    <label>E-mail ou Matrícula:</label>
+                    <input type="text" placeholder="Digite seu e-mail">
+                </div>
+                <div class="form-group">
+                    <label>Senha:</label>
+                    <input type="password" placeholder="Digite sua senha">
+                </div>
+                <button>Entrar</button>
+            </div>
+            <div class="col" style="background: #f8f9fa; padding: 20px; border-radius: 8px;">
+                <h3>Cadastrar Funcionário</h3>
+                <div class="form-group">
+                    <label>Nome Completo:</label>
+                    <input type="text" placeholder="Nome do funcionário">
+                </div>
+                <div class="form-group">
+                    <label>Cargo / Permissão:</label>
+                    <select>
+                        <option>Direção (Acesso Total)</option>
+                        <option>Supervisão (Acesso Total)</option>
+                        <option>Professor(a) (Apenas Registro)</option>
+                    </select>
+                </div>
+                <button class="btn-secondary">Solicitar Cadastro</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="registro" class="container">
+        <h2>2. Registrar Nova Ocorrência</h2>
+        <form>
+            <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ffeeba;">
+                <h3 style="margin-top: 0; border: none; font-size: 16px;">Dados do Aluno</h3>
+                <div class="row">
+                    <div class="col form-group">
+                        <label>Nome Completo do Aluno:</label>
+                        <input type="text" placeholder="Ex: João Silva Sauro">
+                    </div>
+                    <div class="col form-group">
+                        <label>Nº SIMADE:</label>
+                        <input type="text" placeholder="Ex: 123456789">
+                    </div>
+                    <div class="col form-group">
+                        <label>Data de Nascimento:</label>
+                        <input type="date">
+                    </div>
+                </div>
+            </div>
+
+            <h3>Detalhes da Ocorrência</h3>
+            <div class="row">
+                <div class="col form-group">
+                    <label>Data (Permite retroativa):</label>
+                    <input type="date">
+                </div>
+                <div class="col form-group">
+                    <label>Horário da Ocorrência:</label>
+                    <input type="time">
+                </div>
+                <div class="col form-group">
+                    <label>Turma do Aluno:</label>
+                    <select>
+                        <option>1º Ano A</option>
+                        <option>2º Ano B</option>
+                        <option>3º Ano A</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col form-group">
+                    <label>Matéria (Se ocorreu em sala):</label>
+                    <input type="text" placeholder="Ex: Matemática">
+                </div>
+                <div class="col form-group">
+                    <label>Professor(a) do Horário:</label>
+                    <input type="text" placeholder="Nome do professor">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Tipo(s) de Infração (Selecione um ou mais):</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox"> Atraso</label>
+                    <label><input type="checkbox"> Uso de celular</label>
+                    <label><input type="checkbox"> Desrespeito</label>
+                    <label><input type="checkbox"> Agressão física</label>
+                    <label><input type="checkbox"> Uniforme incorreto</label>
+                    <label><input type="checkbox"> Fuga da sala</label>
+                    <label><input type="checkbox"> Outros</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Descrição Detalhada do Fato:</label>
+                <textarea rows="4" placeholder="Descreva o que aconteceu..."></textarea>
+            </div>
+
+            <button type="button">Salvar Ocorrência</button>
+        </form>
+    </div>
+
+    <div id="pesquisa" class="container">
+        <h2>3. Pesquisa e Gestão de Turmas (Direção/Supervisão)</h2>
+        
+        <div class="row" style="background: #e9ecef; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+            <div class="col form-group">
+                <label>1. Selecione a Turma:</label>
+                <select>
+                    <option value="">-- Escolha --</option>
+                    <option selected>1º Ano A (Ensino Médio)</option>
+                    <option>2º Ano B (Ensino Médio)</option>
+                </select>
+            </div>
+            <div class="col form-group">
+                <label>2. Data / Período:</label>
+                <div style="display: flex; gap: 5px;">
+                    <input type="date" title="De">
+                    <input type="date" title="Até">
+                </div>
+            </div>
+            <div class="col form-group">
+                <label>3. Tipo de Infração:</label>
+                <select>
+                    <option>Todas</option>
+                    <option>Atrasos</option>
+                    <option>Indisciplina</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 20px;">
+            <div class="col" style="flex: 0 0 30%; border-right: 1px solid #ddd; padding-right: 15px;">
+                <h3>Lista de Alunos</h3>
+                <p style="font-size: 12px; color: #666; margin-top: -5px;">(Clique no nome para filtrar)</p>
+                <ul class="lista-alunos">
+                    <li>➔ Alessandra Vieira</li>
+                    <li>➔ Bruno Henrique</li>
+                    <li class="ativo">➔ João Silva Sauro</li>
+                    <li>➔ Maria Eduarda</li>
+                    <li>➔ Ricardo Souza</li>
+                </ul>
+            </div>
+
+            <div class="col" style="flex: 0 0 70%; padding-left: 15px;">
+                <h3>Ocorrências Encontradas</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Aluno</th>
+                            <th>Infrações</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>15/04/2026</td>
+                            <td>João Silva Sauro</td>
+                            <td>Uso de celular</td>
+                            <td><button class="btn-info">Ver Detalhes</button></td>
+                        </tr>
+                        <tr>
+                            <td>10/04/2026</td>
+                            <td>João Silva Sauro</td>
+                            <td>Atraso</td>
+                            <td><button class="btn-info">Ver Detalhes</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="perfil" class="container">
+        <h2>4. Perfil e Histórico: João Silva Sauro</h2>
+        
+        <div class="row" style="margin-bottom: 20px;">
+            <div class="col" style="background: #e2e3e5; padding: 15px; border-radius: 8px;">
+                <p><strong>Nº SIMADE:</strong> 123456789</p>
+                <p><strong>Nascimento:</strong> 15/05/2010</p>
+                <p><strong>Turma Atual:</strong> 1º Ano A</p>
+            </div>
+            <div class="col" style="background: #d4edda; padding: 15px; border-radius: 8px;">
+                <h3 style="margin-top: 0; border: none;">Resumo do Ano Letivo</h3>
+                <p><strong>Total de Ocorrências:</strong> 3 registros</p>
+                <p><strong>Infração mais reincidente:</strong> Uso de celular</p>
+            </div>
+        </div>
+
+        <h3>Linha do Tempo de Ocorrências</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Horário</th>
+                    <th>Matéria/Professor</th>
+                    <th>Tipo(s) de Infração</th>
+                    <th>Relato</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>15/04/2026</td>
+                    <td>10:30</td>
+                    <td>Física / Prof. Carlos</td>
+                    <td>Uso de celular</td>
+                    <td><button class="btn-secondary" style="padding: 5px 10px; font-size: 12px;">Ler Relato Completo</button></td>
+                </tr>
+                <tr>
+                    <td>02/03/2026</td>
+                    <td>08:50</td>
+                    <td>- / Ana (Supervisão)</td>
+                    <td>Fuga da sala</td>
+                    <td><button class="btn-secondary" style="padding: 5px 10px; font-size: 12px;">Ler Relato Completo</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
