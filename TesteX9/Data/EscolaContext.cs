@@ -10,6 +10,7 @@ namespace TesteX9.Data
         public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Ocorrencia> Ocorrencias { get; set; }
+        public DbSet<TipoInfracao> TiposInfracao { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -78,15 +78,15 @@
             <div class="row">
                 <div class="col form-group">
                     <label>Data (Permite retroativa):</label>
-                    <input type="date">
+                    <input type="date" id="dataOcorrencia">
                 </div>
                 <div class="col form-group">
                     <label>Horário da Ocorrência:</label>
-                    <input type="time">
+                    <input type="time" id="horarioOcorrencia">
                 </div>
                 <div class="col form-group">
                     <label>Turma do Aluno:</label>
-                    <select>
+                    <select id="turmaOcorrencia">
                         <option>1º Ano A</option>
                         <option>2º Ano B</option>
                         <option>3º Ano A</option>
@@ -97,33 +97,38 @@
             <div class="row">
                 <div class="col form-group">
                     <label>Matéria (Se ocorreu em sala):</label>
-                    <input type="text" placeholder="Ex: Matemática">
+                    <input type="text" id="materiaOcorrencia" placeholder="Ex: Matemática">
                 </div>
                 <div class="col form-group">
                     <label>Professor(a) do Horário:</label>
-                    <input type="text" placeholder="Nome do professor">
+                    <input type="text" id="professorOcorrencia" placeholder="Nome do professor">
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Tipo(s) de Infração (Selecione um ou mais):</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox"> Atraso</label>
-                    <label><input type="checkbox"> Uso de celular</label>
-                    <label><input type="checkbox"> Desrespeito</label>
-                    <label><input type="checkbox"> Agressão física</label>
-                    <label><input type="checkbox"> Uniforme incorreto</label>
-                    <label><input type="checkbox"> Fuga da sala</label>
-                    <label><input type="checkbox"> Outros</label>
+                <div id="listaCheckboxes" class="checkbox-group">
+                    <label><input type="checkbox" name="infracao" value="Atraso"> Atraso</label>
+                    <label><input type="checkbox" name="infracao" value="Uso de celular"> Uso de celular</label>
+                    <label><input type="checkbox" name="infracao" value="Desrespeito"> Desrespeito</label>
+                    <label><input type="checkbox" name="infracao" value="Agressão física"> Agressão física</label>
+                    <label><input type="checkbox" name="infracao" value="Uniforme incorreto"> Uniforme incorreto</label>
+                    <label><input type="checkbox" name="infracao" value="Fuga da sala"> Fuga da sala</label>
+                    <label><input type="checkbox" name="infracao" value="Outros"> Outros</label>
+                </div>
+                
+                <div style="margin-top: 10px; display: flex; gap: 10px;">
+                    <input type="text" id="novoTipoTexto" placeholder="Outro tipo de infração..." style="flex: 1;">
+                    <button type="button" onclick="adicionarNovoTipoInfracao()" class="btn-info" style="width: auto; padding: 5px 15px;">Adicionar à Lista</button>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Descrição Detalhada do Fato:</label>
-                <textarea rows="4" placeholder="Descreva o que aconteceu..."></textarea>
+                <textarea id="descricaoOcorrencia" rows="4" placeholder="Descreva o que aconteceu..."></textarea>
             </div>
 
-            <button type="button">Salvar Ocorrência</button>
+            <button type="button" onclick="salvarOcorrencia()">Salvar Ocorrência</button>
         </form>
     </div>
 

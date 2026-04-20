@@ -46,23 +46,19 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
-            "BCrypt.Net-Next": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[4.1.0, )"
-            },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[*, )"
+              "version": "[9.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[*, )"
+              "version": "[9.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
+            "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
-              "version": "[*, )"
+              "version": "[9.0.0, )"
             }
           },
           "imports": [
