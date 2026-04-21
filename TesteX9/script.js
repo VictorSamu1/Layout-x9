@@ -136,3 +136,21 @@ async function salvarOcorrencia() {
         console.error(err);
     }
 }
+// ==========================================
+// 5. ADICIONAR NOVO TIPO DE INFRAÇÃO NA TELA
+// ==========================================
+function adicionarNovoTipoInfracao() {
+    const input = document.getElementById('novoTipoTexto');
+    const valor = input.value.trim(); // Pega o texto e tira os espaços em branco
+    
+    if (valor !== "") {
+        const lista = document.getElementById('listaCheckboxes');
+        
+        // Cria a nova caixinha de marcação já selecionada
+        const novaLabel = document.createElement('label');
+        novaLabel.innerHTML = `<input type="checkbox" name="infracao" value="${valor}" checked> ${valor}`;
+        
+        lista.appendChild(novaLabel); // Adiciona na lista
+        input.value = ""; // Limpa a caixinha de texto
+    }
+}

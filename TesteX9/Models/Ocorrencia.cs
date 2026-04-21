@@ -9,9 +9,9 @@ namespace TesteX9.Models
         public int Id { get; set; }
         
         public int AlunoId { get; set; }
-        public Aluno Aluno { get; set; }
+        public Aluno? Aluno { get; set; }
         public int FuncionarioId { get; set; }
-        public Funcionario RegistradoPor { get; set; }
+        public Funcionario? RegistradoPor { get; set; }
 
         public DateTime DataOcorrencia { get; set; }
         public TimeSpan Horario { get; set; }
