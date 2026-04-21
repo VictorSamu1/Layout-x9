@@ -2,7 +2,7 @@
 // 1. CONFIGURAÇÃO DA API
 // ==========================================
 // ATENÇÃO: Confirme no terminal do VS Code qual é a porta exata que o seu 'dotnet run' está a usar (ex: 5000, 5173, etc.)
-const API_URL = 'http://localhost:5173/api'; 
+const API_URL = 'http://localhost:5200/api';
 
 // ==========================================
 // 2. NAVEGAÇÃO DO MENU (Esconder/Mostrar Telas)
@@ -106,7 +106,7 @@ async function salvarOcorrencia() {
         alunoId: 1, // ID do João Silva Sauro
         funcionarioId: 1, // ID do Diretor
         dataOcorrencia: data,
-        horario: horario,
+        horario: horario + ":00", 
         turmaNoMomento: "1º Ano A", 
         materia: materia,
         professorHorario: professor,

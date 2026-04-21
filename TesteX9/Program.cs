@@ -28,4 +28,4 @@ var app = builder.Build();
 app.UseCors("PermitirTudo");
 app.MapControllers();
 
-app.Run();
+app.Run("http://localhost:5200");

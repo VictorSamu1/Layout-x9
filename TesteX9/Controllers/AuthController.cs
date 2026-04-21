@@ -6,7 +6,6 @@ using TesteX9.Models;
 
 namespace TesteX9.Controllers
 {
-    // A rota oficial agora é /api/Auth
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -18,13 +17,10 @@ namespace TesteX9.Controllers
             _context = context;
         }
 
-        // -----------------------------------------------------
-        // 1. ROTA DO THUNDER CLIENT: Cria o Diretor no Banco
-        // -----------------------------------------------------
+        // 1. CRIA O DIRETOR
         [HttpPost("registrar-teste")]
         public async Task<IActionResult> RegistrarTeste()
         {
-            // Verifica se o diretor já existe para não dar erro
             if (await _context.Funcionarios.AnyAsync(f => f.Email == "diretor@escola.com"))
             {
                 return BadRequest(new { mensagem = "O usuário diretor já existe no banco!" });
@@ -34,19 +30,39 @@ namespace TesteX9.Controllers
             {
                 Nome = "Diretor Chefe",
                 Email = "diretor@escola.com",
-                SenhaHash = "123456", // Senha simples para o teste
+                SenhaHash = "123456",
                 Cargo = "Direção"
             };
 
             _context.Funcionarios.Add(diretor);
             await _context.SaveChangesAsync();
-
             return Ok(new { mensagem = "Usuário teste criado com sucesso!" });
         }
 
-        // -----------------------------------------------------
-        // 2. ROTA DO SEU SITE (HTML/JS): Faz o Login
-        // -----------------------------------------------------
+        // 2. CRIA O ALUNO (ESTA É A PARTE QUE FALTAVA!)
+        [HttpPost("criar-aluno-teste")]
+        public async Task<IActionResult> CriarAlunoTeste()
+        {
+            if (await _context.Alunos.AnyAsync(a => a.Id == 1))
+            {
+                return BadRequest(new { mensagem = "O aluno teste já existe no banco!" });
+            }
+
+            var aluno = new Aluno
+            {
+                Id = 1,
+                NomeCompleto = "João Silva Sauro",
+                Simade = "123456789",
+                DataNascimento = new System.DateTime(2010, 5, 15),
+                Turma = "1º Ano A"
+            };
+
+            _context.Alunos.Add(aluno);
+            await _context.SaveChangesAsync();
+            return Ok(new { mensagem = "Aluno teste criado com sucesso!" });
+        }
+
+        // 3. FAZ O LOGIN
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
@@ -58,11 +74,10 @@ namespace TesteX9.Controllers
                 return Unauthorized(new { mensagem = "E-mail ou senha inválidos." });
             }
 
-            // Devolve as informações para o seu JavaScript liberar a tela!
             return Ok(new { 
                 mensagem = "Login realizado!",
                 nome = funcionario.Nome,
-                token = "cracha-valido-123" // Token provisório para o JS liberar o acesso
+                token = "cracha-valido-123" 
             });
         }
     }
