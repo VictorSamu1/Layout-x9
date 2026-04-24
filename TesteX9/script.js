@@ -1,12 +1,9 @@
-// ==========================================
+
 // 1. CONFIGURAÇÃO DA API
-// ==========================================
-// ATENÇÃO: Confirme no terminal do VS Code qual é a porta exata que o seu 'dotnet run' está a usar (ex: 5000, 5173, etc.)
 const API_URL = 'http://localhost:5200/api';
 
-// ==========================================
+
 // 2. NAVEGAÇÃO DO MENU (Esconder/Mostrar Telas)
-// ==========================================
 function esconderTodasAsTelas() {
     document.getElementById('login').style.display = 'none';
     document.getElementById('registro').style.display = 'none';
@@ -17,10 +14,10 @@ function esconderTodasAsTelas() {
 // Faz os links do menu superior funcionarem
 document.querySelectorAll('nav a').forEach(link => {
     link.addEventListener('click', function(evento) {
-        evento.preventDefault(); // Evita que a página pisque
+        evento.preventDefault(); 
         esconderTodasAsTelas();
         
-        // Descobre qual tela o link quer abrir (ex: tira o # de '#registro')
+        
         const telaDestino = this.getAttribute('href').substring(1);
         document.getElementById(telaDestino).style.display = 'block';
     });
@@ -32,21 +29,20 @@ window.onload = () => {
     document.getElementById('login').style.display = 'block';
 };
 
-// ==========================================
+
 // 3. LÓGICA DE LOGIN CONECTADA COM A API
-// ==========================================
 const formLogin = document.getElementById('formLogin');
 
 if (formLogin) {
     formLogin.addEventListener('submit', async function(evento) {
-        evento.preventDefault(); // Não recarrega a página ao clicar em "Entrar"
+        evento.preventDefault(); 
 
         // Pega os valores das caixinhas
         const emailDigitado = document.getElementById('emailLogin').value;
         const senhaDigitada = document.getElementById('senhaLogin').value;
 
         try {
-            // Manda o pedido para o C#
+          
             const resposta = await fetch(`${API_URL}/Auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -62,14 +58,14 @@ if (formLogin) {
                 // Sucesso!
                 alert('Bem-vindo(a) ao sistema, ' + dados.nome + '!');
                 
-                // Salva o "Crachá" (Token JWT) no navegador
+                
                 localStorage.setItem('tokenEscola', dados.token);
                 
-                // Muda automaticamente para a tela de Registro
+      
                 esconderTodasAsTelas();
                 document.getElementById('registro').style.display = 'block';
             } else {
-                // Erro (senha errada, usuário não existe)
+                
                 alert('Erro: ' + dados.mensagem);
             }
         } catch (erro) {
@@ -79,18 +75,17 @@ if (formLogin) {
     });
 }
 
-// ==========================================
+
 // 4. SALVAR NOVA OCORRÊNCIA
-// ==========================================
 async function salvarOcorrencia() {
-    // 1. Tenta ler os valores usando os IDs do HTML
+   
     const data = document.getElementById('dataOcorrencia').value;
     const horario = document.getElementById('horarioOcorrencia').value;
     const materia = document.getElementById('materiaOcorrencia').value || "-";
     const professor = document.getElementById('professorOcorrencia').value || "-";
     const descricao = document.getElementById('descricaoOcorrencia').value;
 
-    // 2. Lê as caixinhas de marcação (checkboxes)
+  
     const checkboxes = document.querySelectorAll('input[name="infracao"]:checked');
     let infracoesSelecionadas = [];
     checkboxes.forEach((box) => {
@@ -101,7 +96,7 @@ async function salvarOcorrencia() {
         return alert("Por favor, preencha a data, horário e marque pelo menos uma infração!");
     }
 
-    // 3. Monta o pacote para o banco de dados
+    
     const pacoteOcorrencia = {
         alunoId: 1, // ID do João Silva Sauro
         funcionarioId: 1, // ID do Diretor
@@ -124,7 +119,7 @@ async function salvarOcorrencia() {
 
         if (resposta.ok) {
             alert("✅ Ocorrência salva com sucesso no Banco de Dados!");
-            // Limpa o texto da descrição para poder fazer outra ocorrência
+           
             document.getElementById('descricaoOcorrencia').value = '';
             checkboxes.forEach(box => box.checked = false);
         } else {
@@ -136,12 +131,11 @@ async function salvarOcorrencia() {
         console.error(err);
     }
 }
-// ==========================================
+
 // 5. ADICIONAR NOVO TIPO DE INFRAÇÃO NA TELA
-// ==========================================
 function adicionarNovoTipoInfracao() {
     const input = document.getElementById('novoTipoTexto');
-    const valor = input.value.trim(); // Pega o texto e tira os espaços em branco
+    const valor = input.value.trim(); 
     
     if (valor !== "") {
         const lista = document.getElementById('listaCheckboxes');
@@ -150,7 +144,7 @@ function adicionarNovoTipoInfracao() {
         const novaLabel = document.createElement('label');
         novaLabel.innerHTML = `<input type="checkbox" name="infracao" value="${valor}" checked> ${valor}`;
         
-        lista.appendChild(novaLabel); // Adiciona na lista
-        input.value = ""; // Limpa a caixinha de texto
+        lista.appendChild(novaLabel); 
+        input.value = ""; 
     }
 }

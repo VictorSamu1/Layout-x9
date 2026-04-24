@@ -17,7 +17,7 @@ namespace TesteX9.Controllers
             _context = context;
         }
 
-        // 1. CRIA O DIRETOR
+        // CRIA O DIRETOR
         [HttpPost("registrar-teste")]
         public async Task<IActionResult> RegistrarTeste()
         {
@@ -39,7 +39,7 @@ namespace TesteX9.Controllers
             return Ok(new { mensagem = "Usuário teste criado com sucesso!" });
         }
 
-        // 2. CRIA O ALUNO (ESTA É A PARTE QUE FALTAVA!)
+        // CRIA O ALUNO
         [HttpPost("criar-aluno-teste")]
         public async Task<IActionResult> CriarAlunoTeste()
         {
@@ -62,7 +62,7 @@ namespace TesteX9.Controllers
             return Ok(new { mensagem = "Aluno teste criado com sucesso!" });
         }
 
-        // 3. FAZ O LOGIN
+        // FAZ O LOGIN
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest request)
         {
