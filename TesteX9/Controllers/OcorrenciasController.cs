@@ -15,6 +15,9 @@ namespace TesteX9.Controllers
 
         public OcorrenciasController(EscolaContext context) { _context = context; }
 
+
+
+        //AQUI REGISTRAMOS UMA NOVA OCORRÊNCIA NO SISTEMA
         [HttpPost]
         public async Task<IActionResult> RegistrarOcorrencia([FromBody] Ocorrencia novaOcorrencia)
         {

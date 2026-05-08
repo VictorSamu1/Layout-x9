@@ -37,7 +37,7 @@ if (formLogin) {
     formLogin.addEventListener('submit', async function(evento) {
         evento.preventDefault(); 
 
-        // Pega os valores das caixinhas
+        
         const emailDigitado = document.getElementById('emailLogin').value;
         const senhaDigitada = document.getElementById('senhaLogin').value;
 
@@ -55,7 +55,7 @@ if (formLogin) {
             const dados = await resposta.json();
 
             if (resposta.ok) {
-                // Sucesso!
+                
                 alert('Bem-vindo(a) ao sistema, ' + dados.nome + '!');
                 
                 
@@ -118,7 +118,7 @@ async function salvarOcorrencia() {
         });
 
         if (resposta.ok) {
-            alert("✅ Ocorrência salva com sucesso no Banco de Dados!");
+            alert("Ocorrência salva com sucesso!");
            
             document.getElementById('descricaoOcorrencia').value = '';
             checkboxes.forEach(box => box.checked = false);
@@ -132,7 +132,7 @@ async function salvarOcorrencia() {
     }
 }
 
-// 5. ADICIONAR NOVO TIPO DE INFRAÇÃO NA TELA
+// 5. AQUI ADICIONAMOS NOVOS TIPOS DE INFRAÇÃO
 function adicionarNovoTipoInfracao() {
     const input = document.getElementById('novoTipoTexto');
     const valor = input.value.trim(); 
@@ -140,7 +140,7 @@ function adicionarNovoTipoInfracao() {
     if (valor !== "") {
         const lista = document.getElementById('listaCheckboxes');
         
-        // Cria a nova caixinha de marcação já selecionada
+        // Aqui criamos a nova caixinha de marcação já selecionada
         const novaLabel = document.createElement('label');
         novaLabel.innerHTML = `<input type="checkbox" name="infracao" value="${valor}" checked> ${valor}`;
         

@@ -24,7 +24,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// 5. Ativa as configurações
+// Ativa as configurações
 app.UseCors("PermitirTudo");
 app.MapControllers();
 

@@ -15,6 +15,8 @@ namespace TesteX9.Controllers
         [HttpGet]
         public async Task<IActionResult> Listar() => Ok(await _context.TiposInfracao.ToListAsync());
 
+
+         // ADICIONA NOVA INFRAÇÃO E LANÇA O ERRO SE CASO ELA JA EXISTIR
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] TipoInfracao novo)
         {
